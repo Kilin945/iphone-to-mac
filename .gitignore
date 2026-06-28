@@ -1,0 +1,4 @@
+photos/
+.phone-token
+*.log
+.DS_Store
