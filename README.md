@@ -46,7 +46,7 @@ Requires an iPhone + a Mac on the same Wi-Fi.
 
 ## Use
 1. Photo: press the Action Button. Screenshot/image: Share → `ScreenshotsToMac`.
-2. Lands in `photos/<date>/<time>.jpg` (HEIC auto-converted to jpg).
+2. Lands in `photos/<YYYY-MM>/<YYYY-MM-DD>/<YYYY-MM-DD>_<seq>.jpg` (HEIC auto-converted to jpg; sequence restarts daily).
 
 ## Troubleshooting (rarely needed)
 - Stuck / not receiving? Double-click `restart-server.command`. Check both devices are on the same Wi-Fi.
@@ -98,7 +98,7 @@ iPhone 拍照或截圖 → 1 秒內到 Mac，走區網、不經雲端。需要 i
 
 ## 使用
 1. 拍照按 Action 按鈕；截圖／圖片用分享選單選 `ScreenshotsToMac`。
-2. 存到 `photos/<日期>/<時間>.jpg`（HEIC 自動轉 jpg）。
+2. 存到 `photos/<年月>/<日期>/<日期>_<流水號>.jpg`（HEIC 自動轉 jpg；流水號每天從 1 起算）。
 
 ## 疑難排解（很少用到）
 - 卡住／沒收到？點兩下 `restart-server.command`，並確認兩台同一個 Wi-Fi。
