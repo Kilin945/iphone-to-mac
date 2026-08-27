@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-# LAN receiver: iPhone Shortcut POSTs a photo/screenshot here, it lands in photos/<YYYY-MM>/<YYYY-MM-DD>/<time>.<ext>
+# LAN receiver: iPhone Shortcut POSTs a photo/screenshot here, it lands in photos/<YYYY-MM>/<YYYY-MM-DD>/<YYYY-MM-DD>_<seq>.<ext>
 # Shortcut posts to:  http://<your-mac>.local:<PORT>/up/<TOKEN>
 
 import os
+import glob
 import datetime
 import subprocess
 import http.server
@@ -80,12 +81,12 @@ class Handler(http.server.BaseHTTPRequestHandler):
         day = now.strftime("%Y-%m-%d")
         destdir = os.path.join(DEST_ROOT, month, day)
         os.makedirs(destdir, exist_ok=True)
-        base = now.strftime("%H%M%S")
-        fname = "%s.%s" % (base, ext)
-        i = 1
-        while os.path.exists(os.path.join(destdir, fname)):
-            fname = "%s_%d.%s" % (base, i, ext)
-            i += 1
+        # per-day sequence number: 2026-08-27_1.png, 2026-08-27_2.jpg, ...
+        # extension-agnostic check so a heic->jpg convert still occupies its number
+        seq = 1
+        while glob.glob(os.path.join(destdir, "%s_%d.*" % (day, seq))):
+            seq += 1
+        fname = "%s_%d.%s" % (day, seq, ext)
         path = os.path.join(destdir, fname)
         with open(path, "wb") as fp:
             fp.write(body)
